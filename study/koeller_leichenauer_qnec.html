@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1512.06109 Holographic Proof of the QNEC</title>
+
+<style>
+
+.subtitle{
+    font-style:italic;
+    color:#666;
+}
+
+</style>
+
+<script>
+MathJax = {
+tex: {
+inlineMath: [['$', '$'], ['\\(','\\)']],
+displayMath: [['$$','$$']]
+}
+};
+</script>
+
+<script async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+</head>
+
+<body>
+
+<h1><a href="https://arxiv.org/abs/1512.06109">1512.06109</a> Holographic Proof of the Quantum Null Energy Condition</h1>
+
+<p class="subtitle">by Jason Koeller, Stefan Leichenauer</p>
+
+<h2>Prerequisites (Grad level)</h2>
+
+<p>Basic familiarity with Ryu-Takayanagi, Fefferman-Graham expansion, comfort with basic differential geometry.</p>
+
+<h2>Summary</h2>
+
+<p>So in this paper, the authors are using AdS/CFT to derive the QNEC</p>
+
+$$\langle T_{kk} \rangle \geq \frac{\hbar}{2\pi} S''$$
+
+<p>for the boundary CFT, where $T_{kk} \equiv T_{\mu\nu}k^\mu k^\nu$, with $k^\mu$ a boundary null vector, and the derivatives on $S$ (i.e. $S'' \equiv \partial_\lambda^2 S$) are with respect to deformation along that same null direction, parameterized by $\lambda$.</p>
+
+<p>The idea is that you draw an extremal surface and then you deform the entangling surface along a null direction in the boundary so that in response the extremal surface being anchored also gets deformed: so now you have a collection of extremal surfaces called $\mathcal{M}$. Entanglement-Wedge-Nesting (Wall's theorem from <a href="https://arxiv.org/abs/1211.3494">this</a> paper) says that this surface is achronal so that a tangent vector $s^\mu$ to this surface is spacelike or null-like, $s^2 \geq 0$. When you choose the $s^\mu$ to be the tangent vector along the direction of deformation parameterized by $\lambda$ and perpendicular to the other directions in the tangent space, $\partial_\lambda X^i_{\perp}$, you get the QNEC.</p>
+
+<p>Energy-Momentum $T_{kk}$ appears from the leading state dependent piece in the FG expansion when you try to compute the norm of the vector, and vN entropy $S$ appears because $X$ are the embedding coordinates of an <em>extremal</em> surface — themselves Fefferman-Graham expanded near the boundary — and its area is proportional to $S$ via Ryu-Takayanagi. Double derivatives appear because extremality is itself a first-order stationarity condition: the first variation of the surface (and hence of its area, i.e. of $S$) under the null deformation vanishes identically, so the leading non-trivial response of $S$ to the deformation is quadratic in $\lambda$, i.e. governed by $S''$ — matching the order of $T_{kk}$, which itself comes from a norm-squared and so is also quadratic. Other divergences that could have appeared from the boundary limit of the FG expansion are eliminated by choosing $k_i K^i_{ab} = 0$, where $K$ is the extrinsic curvature; it is exactly this condition that lets the FG expansion of $X$ simplify enough to close the computation.</p>
+
+<p>Below are some detailed calculations so that you can sit back and enjoy the clearly written paper.</p>
+
+<h2>Detailed calculations</h2>
+
+<p>Coming soon...</p>
+
+<p><a href="index.html">← Back to Study with me</a></p>
+
+</body>
+</html>

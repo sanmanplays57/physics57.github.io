@@ -8,6 +8,17 @@
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+
+@view-transition{
+    navigation:auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root){
+    animation-duration:0.8s;
+}
+
 body{
     max-width:900px;
     margin:auto;
@@ -24,11 +35,139 @@ h1{
     margin-bottom:5px;
 }
 
-.subtitle{
-    text-align:center;
-    font-style:italic;
-    color:#666;
+.hero{
+    position:relative;
+    left:50%;
+    right:50%;
+    width:100vw;
+    margin-left:-50vw;
+    margin-right:-50vw;
+    margin-top:-40px;
     margin-bottom:40px;
+    min-height:80vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:#000;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse at center, #0a0a14 0%, #000000 75%);
+}
+
+.hero-bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        radial-gradient(1.5px 1.5px at 40px 60px, #fff, transparent),
+        radial-gradient(1px 1px at 120px 140px, #fff, transparent),
+        radial-gradient(1px 1px at 200px 30px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 260px 180px, #fff, transparent),
+        radial-gradient(1px 1px at 320px 90px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 20px 190px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.5px 1.5px at 160px 220px, #fff, transparent),
+        radial-gradient(1px 1px at 350px 240px, rgba(255,255,255,0.7), transparent);
+    background-repeat:repeat;
+    background-size:380px 260px;
+    opacity:0.85;
+}
+
+.accretion-disk{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:460px;
+    height:460px;
+    margin:-230px 0 0 -230px;
+    border-radius:50%;
+    background:conic-gradient(from 0deg,
+        #1a0800, #ff8a00, #ffd9a0, #ff8a00, #3a1500,
+        #000000, #3a1500, #ff8a00, #ffd9a0, #ff8a00, #1a0800);
+    filter:blur(10px);
+    box-shadow:0 0 90px 25px rgba(255,140,40,0.20), 0 0 180px 70px rgba(255,90,20,0.10);
+    animation:spin 90s ease-in-out infinite;
+}
+
+.accretion-disk::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    background:repeating-conic-gradient(from 0deg,
+        transparent 0deg 7deg,
+        rgba(255,255,255,0.18) 7deg 8deg,
+        transparent 8deg 19deg,
+        rgba(255,200,140,0.14) 19deg 20deg,
+        transparent 20deg 33deg,
+        rgba(255,255,255,0.12) 33deg 34deg,
+        transparent 34deg 41deg,
+        rgba(255,180,110,0.16) 41deg 42deg);
+    mix-blend-mode:screen;
+    animation:flicker 3.5s ease-in-out infinite, spin-reverse 140s linear infinite;
+}
+
+@keyframes spin{
+    0%{transform:rotate(0deg) scale(1);}
+    25%{transform:rotate(90deg) scale(1.02);}
+    50%{transform:rotate(180deg) scale(0.98);}
+    75%{transform:rotate(270deg) scale(1.015);}
+    100%{transform:rotate(360deg) scale(1);}
+}
+
+@keyframes spin-reverse{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(-360deg);}
+}
+
+@keyframes flicker{
+    0%,100%{opacity:0.55;}
+    20%{opacity:0.85;}
+    45%{opacity:0.4;}
+    65%{opacity:0.9;}
+    80%{opacity:0.5;}
+}
+
+.event-horizon{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:190px;
+    height:190px;
+    margin:-95px 0 0 -95px;
+    border-radius:50%;
+    background:#000;
+    box-shadow:0 0 40px 10px rgba(0,0,0,0.9);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:0 20px;
+}
+
+.hero-title{
+    font-family:'Montserrat', sans-serif;
+    font-weight:200;
+    font-size:2.4em;
+    letter-spacing:0.35em;
+    text-transform:uppercase;
+    color:#f2f2f2;
+    text-shadow:0 0 20px rgba(255,255,255,0.25);
+    margin:0 0 18px 0;
+}
+
+.hero-subtitle{
+    font-family:'Montserrat', sans-serif;
+    font-weight:300;
+    font-size:0.95em;
+    letter-spacing:0.15em;
+    color:#b8b8c4;
+    margin:0;
 }
 
 h2{
@@ -72,14 +211,18 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 
 <body>
 
-<h1>Gauge Fix Yourself</h1>
-
-<p class="subtitle">
-if you don't like hep-th.
-</p>
+<div class="hero">
+<div class="hero-bg"></div>
+<div class="accretion-disk"></div>
+<div class="event-horizon"></div>
+<div class="hero-content">
+<h1 class="hero-title">Gauge Fix Yourself</h1>
+<p class="hero-subtitle">if you don't like hep-th.</p>
+</div>
+</div>
 
 <p>
-Welcome. 
+Welcome.
 </p>
 
 <hr>
@@ -121,28 +264,62 @@ Quantum Field Theory
 </li>
 
 <li>
-<a href="things/Quantum_Field_Theory/">
+<a href="things/Electromagnetism/">
 Electromagnetism
 </a>
 </li>
 
 <li>
-<a href="things/Quantum_Field_Theory/">
-Electromagnetism
+<a href="things/Thermodynamics_and_Statistical_Mechanics/">
+Thermodynamics and Statistical Mechanics
 </a>
 </li>
 
-</ul>
-
-<hr>
-
-<h2><a href="thoughts/">Thoughts and Calculations</a></h2>
-
-<ul>
+<li>
+<a href="things/Optics/">
+Optics
+</a>
+</li>
 
 <li>
-<a href="thoughts/noether.html">
-Subtleties of Noether's theorem
+<a href="things/Special_Relativity/">
+Special Relativity
+</a>
+</li>
+
+<li>
+<a href="things/Condensed_Matter_Physics/">
+Condensed Matter Physics
+</a>
+</li>
+
+<li>
+<a href="things/Particle_Pheno/">
+Particle Pheno
+</a>
+</li>
+
+<li>
+<a href="things/Quantum_Gravity/">
+Quantum Gravity
+</a>
+</li>
+
+<li>
+<a href="things/Experimental_Physics/">
+Experimental Physics
+</a>
+</li>
+
+<li>
+<a href="things/Atomic_and_Molecular_Physics/">
+Atomic and Molecular Physics
+</a>
+</li>
+
+<li>
+<a href="things/Mathematical_Methods/">
+Mathematical Methods
 </a>
 </li>
 
@@ -152,11 +329,9 @@ Subtleties of Noether's theorem
 
 <h2><a href="resources/">Resource Recommendations</a></h2>
 
-<p>
+<hr>
 
-</p>
-
-<h2><a href="resources/">Miscellaneous</a></h2>
+<h2><a href="miscellaneous/">Miscellaneous</a></h2>
 
 </body>
 
