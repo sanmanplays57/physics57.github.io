@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Time Travel and Warp Drives</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+    </style>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .content {
+            position: relative;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px 40px;
+            background: rgba(15, 20, 35, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            font-family: Georgia, serif;
+            opacity: 0;
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+
+        .content h1,
+        .content > p {
+            opacity: 0;
+            animation: fadeInUp 0.7s ease-out forwards;
+        }
+
+        .content h1 { animation-delay: 0.35s; }
+        .content > p:nth-of-type(1) { animation-delay: 0.55s; }
+        .content > p:nth-of-type(2) { animation-delay: 0.75s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .content,
+            .content h1,
+            .content > p {
+                animation: none;
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            letter-spacing: 0.1em;
+            color: #FFFFFF;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        p, li {
+            color: #E8EEF7;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        a { color: #79D4FF; }
+        a:hover { color: #B7EBFF; }
+    </style>
+</head>
+
+<body>
+
+<video id="bg-video" src="output.mp4" autoplay muted playsinline></video>
+
+<div class="content">
+
+<h1>Time Travel and Warp Drives</h1>
+
+<p>Coming soon...</p>
+
+<p><a href="index.html">← Back to General Relativity</a></p>
+
+</div>
+
+<script>
+(function () {
+    const video = document.getElementById('bg-video');
+    let reversing = false;
+    const step = 1 / 24; // seconds to step back per rendered frame
+
+    video.addEventListener('ended', () => {
+        reversing = true;
+        video.pause();
+        reverseTick();
+    });
+
+    // Wait for each seek to actually render before requesting the next one,
+    // otherwise the browser coalesces rapid currentTime writes and the
+    // reverse playback appears to just snap back to the start.
+    video.addEventListener('seeked', () => {
+        if (reversing) {
+            requestAnimationFrame(reverseTick);
+        }
+    });
+
+    function reverseTick() {
+        if (!reversing) return;
+
+        if (video.currentTime <= 0) {
+            reversing = false;
+            video.play();
+            return;
+        }
+
+        video.currentTime = Math.max(0, video.currentTime - step);
+    }
+})();
+</script>
+
+</body>
+</html>

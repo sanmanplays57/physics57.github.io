@@ -1,10 +1,115 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Electromagnetism</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+    </style>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* wrapper holds the video so we can animate a slow zoom in / zoom out
+           on it independently. The video plays once and its last frame stays. */
+        #bg-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        #bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%) scale(1);
+            transform-origin: center center;
+            /* slow, endless zoom-in / zoom-out breathing on the frame */
+            animation: kenburns 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes kenburns {
+            from { transform: translate(-50%, -50%) scale(1.0); }
+            to   { transform: translate(-50%, -50%) scale(1.18); }
+        }
+
+        /* glowing dust particles that periodically brighten and dim */
+        #dust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .content {
+            position: relative;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px 40px;
+            background: rgba(15, 20, 35, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            font-family: Georgia, serif;
+            opacity: 0;
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            letter-spacing: 0.1em;
+            color: #FFFFFF;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        p, li {
+            color: #E8EEF7;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        ul { line-height: 1.9; }
+
+        a { color: #79D4FF; text-decoration: none; }
+        a:hover { color: #B7EBFF; text-decoration: underline; }
+
+        @media (prefers-reduced-motion: reduce) {
+            #bg-video { animation: none; }
+            .content { animation: none; opacity: 1; }
+        }
+    </style>
 </head>
 
 <body>
+
+<div id="bg-wrap">
+    <video id="bg-video" src="the_wobbliness_of_the_helix_st.mp4" autoplay muted playsinline></video>
+</div>
+
+<canvas id="dust"></canvas>
+
+<div class="content">
 
 <h1>Electromagnetism</h1>
 
@@ -19,6 +124,86 @@
 </ul>
 
 <p><a href="../">← Back to Things</a></p>
+
+</div>
+
+<script>
+(function () {
+    // Video plays once; freeze on the last frame (belt-and-suspenders in case
+    // the encoder leaves a hair of trailing time / the browser tries to reset).
+    const video = document.getElementById('bg-video');
+    video.addEventListener('ended', () => {
+        video.pause();
+        if (isFinite(video.duration)) {
+            video.currentTime = Math.max(0, video.duration - 0.04);
+        }
+    });
+
+    // Glowing dust: soft points that each breathe (glow -> dim) on their own
+    // phase, so the field twinkles rather than pulsing in unison.
+    const canvas = document.getElementById('dust');
+    const ctx = canvas.getContext('2d');
+    let w, h, dust = [];
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    function build() {
+        const dpr = window.devicePixelRatio || 1;
+        w = canvas.width  = Math.floor(innerWidth  * dpr);
+        h = canvas.height = Math.floor(innerHeight * dpr);
+        canvas.style.width  = innerWidth + 'px';
+        canvas.style.height = innerHeight + 'px';
+        const count = Math.round((innerWidth * innerHeight) / 14000);
+        dust = [];
+        for (let i = 0; i < count; i++) {
+            dust.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: rand(0.6, 2.2) * dpr,
+                drift: rand(-0.12, 0.12) * dpr,   // gentle horizontal drift
+                rise: rand(-0.18, -0.04) * dpr,   // gentle upward float
+                // hue biased toward warm/cyan sparks
+                hue: Math.random() < 0.5 ? rand(180, 210) : rand(35, 55),
+                phase: Math.random() * Math.PI * 2,
+                speed: rand(0.6, 1.8)             // how fast it glows/dims
+            });
+        }
+    }
+
+    function frame(t) {
+        ctx.clearRect(0, 0, w, h);
+        ctx.globalCompositeOperation = 'lighter';
+        const time = t / 1000;
+        for (const d of dust) {
+            // periodic glow/dim: brightness oscillates between ~0.1 and ~1
+            const glow = 0.55 + 0.45 * Math.sin(time * d.speed + d.phase);
+            const alpha = 0.10 + 0.9 * glow;
+            const rr = d.r * (1 + 0.6 * glow);
+
+            d.x += d.drift;
+            d.y += d.rise;
+            if (d.y < -10) { d.y = h + 10; d.x = Math.random() * w; }
+            if (d.x < -10) d.x = w + 10;
+            if (d.x > w + 10) d.x = -10;
+
+            const grad = ctx.createRadialGradient(d.x, d.y, 0, d.x, d.y, rr * 4);
+            grad.addColorStop(0, `hsla(${d.hue}, 100%, 75%, ${alpha})`);
+            grad.addColorStop(1, `hsla(${d.hue}, 100%, 75%, 0)`);
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, rr * 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        requestAnimationFrame(frame);
+    }
+
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    build();
+    addEventListener('resize', build);
+    if (!reduce) requestAnimationFrame(frame);
+})();
+</script>
 
 </body>
 </html>

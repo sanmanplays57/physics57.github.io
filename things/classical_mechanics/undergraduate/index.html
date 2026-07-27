@@ -1,34 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Classical Mechanics - Undergraduate</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+
+    html, body { margin: 0; padding: 0; height: 100%; }
+    html { background: #0b0f14; }
+
+    #bg-video {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* content sits on the LEFT, over the dark side of the board scene */
+    .content {
+        position: relative;
+        max-width: 500px;
+        margin: 6vh 0 6vh 6vw;
+        padding: 28px 36px;
+        background: rgba(12, 16, 24, 0.5);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 16px;
+        font-family: Georgia, serif;
+        opacity: 0;
+        animation: fadeInUp 0.9s ease-out forwards;
+    }
+
+    h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 200;
+        letter-spacing: 0.08em;
+        color: #FFFFFF;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.75);
+        margin-top: 0;
+        font-size: 1.7rem;
+    }
+
+    ul { line-height: 1.85; padding-left: 1.2em; }
+    p, li { color: #E8EEF7; text-shadow: 0 1px 4px rgba(0,0,0,0.7); }
+
+    a { color: #8FE3C6; text-decoration: none; }        /* chalk-green accent */
+    a:hover { color: #C7F5E6; text-decoration: underline; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .content { animation: none; opacity: 1; }
+    }
+    @media (max-width: 720px) {
+        .content { margin: 4vh auto; max-width: 90%;
+                   background: rgba(12,16,24,0.68); }
+    }
+    </style>
 </head>
 
 <body>
 
+<video id="bg-video" src="euler_lagrange_blackboard.mp4?v=9" autoplay muted playsinline></video>
+
+<div class="content">
+
 <h1>Classical Mechanics: Undergraduate</h1>
 
 <ul>
-
 <li><a href="action_maximized_or_minimized.html">Is the action maximized or minimized?</a></li>
-
 <li><a href="symmetries_lagrangian_action_eom_solution.html">Symmetries of Lagrangian vs. action vs. EOM vs. solution ...</a></li>
-
 <li><a href="shm_to_kepler_ks_transformation.html">SHM to Kepler and back: Kustaanheimo-Stiefel transformation</a></li>
-
 <li><a href="quartic_potential_shm_spring.html">Quartic potential with just a simple harmonic spring</a></li>
-
 <li><a href="three_body_non_solvability.html">Non-solvability of three-body problem: an intro to integrability</a></li>
-
 <li><a href="three_body_solvable_versions.html">Solvable versions of 3 body problem</a></li>
-
 <li><a href="many_body_physics/">Many body physics is hard, infinitely many body is not</a></li>
-
 <li><a href="ostrogradsky_instabilities.html">Ostrogradsky instabilities</a></li>
-
+<li><a href="vanishing_of_on_shell_actions.html">Vanishing of on-shell actions</a></li>
 </ul>
 
 <p><a href="../">← Back to Classical Mechanics</a></p>
+
+</div>
 
 </body>
 </html>

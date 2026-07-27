@@ -4,11 +4,12 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gauge Fix Yourself</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;1,300&family=Josefin+Sans:wght@100;200&family=Space+Grotesk:wght@300;400;500;700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 
 @view-transition{
     navigation:auto;
@@ -19,15 +20,98 @@
     animation-duration:0.8s;
 }
 
+html{
+    background:#04050b;
+}
+
 body{
     max-width:900px;
     margin:auto;
     padding:40px;
-    font-family:Georgia, serif;
-    line-height:1.7;
-    background:white;
-    color:#222;
+    font-family:'Spectral', Georgia, serif;
+    line-height:1.75;
+    font-size:1.05em;
+    background:transparent;
+    color:#c8d0e4;
 }
+
+/* ---------- full-page cosmic background (fixed, behind everything) ---------- */
+
+.page-bg{
+    position:fixed;
+    inset:0;
+    z-index:-3;
+    background:
+        radial-gradient(ellipse 120% 80% at 50% -10%, #16193a 0%, #0a0b1c 45%, #04050b 100%);
+}
+
+.page-stars{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background-image:
+        radial-gradient(1.5px 1.5px at 40px 60px, #fff, transparent),
+        radial-gradient(1px 1px at 120px 140px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 200px 30px, rgba(180,210,255,0.8), transparent),
+        radial-gradient(1.5px 1.5px at 260px 180px, #fff, transparent),
+        radial-gradient(1px 1px at 320px 90px, rgba(255,235,200,0.7), transparent),
+        radial-gradient(1px 1px at 20px 190px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.5px 1.5px at 160px 220px, rgba(200,225,255,0.9), transparent),
+        radial-gradient(1px 1px at 350px 240px, rgba(255,255,255,0.7), transparent);
+    background-repeat:repeat;
+    background-size:380px 260px;
+    opacity:0.55;
+    animation:twinkle 6s ease-in-out infinite, drift 200s linear infinite;
+}
+
+/* a second, finer star layer for depth */
+.page-stars::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+        radial-gradient(1px 1px at 80px 30px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 180px 120px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 300px 200px, rgba(200,220,255,0.6), transparent),
+        radial-gradient(1px 1px at 240px 60px, rgba(255,255,255,0.5), transparent);
+    background-repeat:repeat;
+    background-size:250px 250px;
+    opacity:0.6;
+    animation:twinkle 9s ease-in-out infinite reverse;
+}
+
+/* soft aurora glows so the void isn't flat */
+.page-aurora{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:
+        radial-gradient(closest-side, rgba(80,130,255,0.10), transparent 70%),
+        radial-gradient(closest-side, rgba(255,140,60,0.07), transparent 70%),
+        radial-gradient(closest-side, rgba(120,90,255,0.08), transparent 70%);
+    background-repeat:no-repeat;
+    background-position:15% 30%, 85% 65%, 60% 105%;
+    background-size:55% 55%, 45% 50%, 60% 45%;
+    animation:aurora 26s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:0.55;}
+    50%{opacity:0.28;}
+}
+
+@keyframes drift{
+    from{background-position:0 0;}
+    to{background-position:380px 260px;}
+}
+
+@keyframes aurora{
+    from{transform:translate3d(-1.5%, -1%, 0) scale(1);}
+    to{transform:translate3d(1.5%, 1.5%, 0) scale(1.08);}
+}
+
+/* ---------------------------------- hero ----------------------------------- */
 
 h1{
     text-align:center;
@@ -43,19 +127,21 @@ h1{
     margin-left:-50vw;
     margin-right:-50vw;
     margin-top:-40px;
-    margin-bottom:40px;
+    margin-bottom:60px;
     min-height:80vh;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
-    background:#000;
+    /* fade the hero's own dark disc into the page background at the bottom edge */
+    -webkit-mask-image:linear-gradient(to bottom, #000 78%, transparent 100%);
+    mask-image:linear-gradient(to bottom, #000 78%, transparent 100%);
 }
 
 .hero-bg{
     position:absolute;
     inset:0;
-    background:radial-gradient(ellipse at center, #0a0a14 0%, #000000 75%);
+    background:radial-gradient(ellipse at center, rgba(12,14,30,0.6) 0%, rgba(4,5,11,0.95) 78%);
 }
 
 .hero-bg::before{
@@ -151,45 +237,161 @@ h1{
 }
 
 .hero-title{
-    font-family:'Montserrat', sans-serif;
-    font-weight:200;
-    font-size:2.4em;
-    letter-spacing:0.35em;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:300;
+    font-size:2.6em;
+    letter-spacing:0.32em;
     text-transform:uppercase;
-    color:#f2f2f2;
-    text-shadow:0 0 20px rgba(255,255,255,0.25);
+    background:linear-gradient(180deg, #ffffff 0%, #cbd6ff 55%, #9fb0e6 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 32px rgba(150,180,255,0.35);
     margin:0 0 18px 0;
 }
 
 .hero-subtitle{
-    font-family:'Montserrat', sans-serif;
+    font-family:'Space Grotesk', sans-serif;
     font-weight:300;
     font-size:0.95em;
-    letter-spacing:0.15em;
-    color:#b8b8c4;
+    letter-spacing:0.22em;
+    color:#aeb6cf;
     margin:0;
 }
 
+/* --------------------------------- content --------------------------------- */
+
 h2{
-    margin-top:45px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:400;
+    letter-spacing:0.02em;
+    margin-top:50px;
 }
 
-a{
-    color:#003399;
+h2 a{
+    font-family:'Space Grotesk', sans-serif;
+    color:#eaf4ff;
+    background:none;
+}
+
+h2 a:hover{
+    color:#fff;
+    text-shadow:0 0 18px rgba(120,210,255,0.6);
     text-decoration:none;
 }
 
+p{
+    color:#c1cadf;
+}
+
+.intro{
+    font-size:1.12em;
+    line-height:1.85;
+    color:#d5ddef;
+}
+
+a{
+    font-family:'Spectral', Georgia, serif;
+    color:#79D4FF;
+    text-decoration:none;
+    transition:color 0.2s ease, text-shadow 0.2s ease;
+}
+
 a:hover{
-    text-decoration:underline;
+    color:#B7EBFF;
+    text-shadow:0 0 12px rgba(121,212,255,0.5);
 }
 
 ul{
-    line-height:2;
+    line-height:2.1;
+    list-style:none;
+    padding-left:0;
+}
+
+ul li{
+    position:relative;
+    padding-left:1.4em;
+}
+
+ul li::before{
+    content:"◇";
+    position:absolute;
+    left:0;
+    color:#6f7ba8;
+    font-size:0.8em;
+    top:0.15em;
 }
 
 hr{
-    margin-top:40px;
-    margin-bottom:40px;
+    margin-top:48px;
+    margin-bottom:48px;
+    border:none;
+    height:1px;
+    background:linear-gradient(to right, transparent, rgba(140,170,255,0.35), transparent);
+}
+
+mjx-container{ color:#dbe3f5; }
+
+/* ---- microscopic handwritten Einstein equations, lava-hot, in the margins ---- */
+
+#efe-layer{
+    /* absolute (not fixed) so the equations are anchored in the document and
+       scroll along with the page instead of staying pinned to the viewport */
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:0;
+    overflow:visible;
+    z-index:1;
+    pointer-events:none;
+}
+
+/* wrapper: handles the blur-in / blur-out "dissolve into thin air" */
+.efe{
+    position:absolute;
+    white-space:nowrap;
+    opacity:0;
+    will-change:transform, opacity, filter;
+    pointer-events:auto;   /* so hovering can dissolve it */
+}
+
+/* the glyphs themselves: hairline, lava-hot, warped as if torn from spacetime */
+.efe-eq{
+    display:inline-block;
+    font-family:'Cormorant', 'Josefin Sans', serif;
+    font-weight:300;
+    font-style:italic;
+    letter-spacing:0.02em;
+    text-align:center;
+    line-height:1.25;
+    background:linear-gradient(180deg, #ffe6a8 0%, #ff9a3c 45%, #ef5a1a 80%, #c22a06 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+    filter:
+        drop-shadow(0 0 5px rgba(255,120,40,0.5))
+        drop-shadow(0 0 12px rgba(255,70,15,0.3))
+        url(#rip);
+}
+
+.efe-eq sub{ font-size:0.68em; vertical-align:-0.25em; }
+.efe-eq sup{ font-size:0.68em; vertical-align:0.4em; }
+
+@keyframes efe-life{
+    0%   { opacity:0;           transform:translateY(6px)  rotate(var(--rot)) scale(0.96); filter:blur(3px); }
+    22%  { opacity:var(--peak); transform:translateY(0)     rotate(var(--rot)) scale(1);    filter:blur(0); }
+    68%  { opacity:var(--peak); transform:translateY(-10px) rotate(var(--rot)) scale(1.01); filter:blur(0); }
+    100% { opacity:0;           transform:translateY(-26px) rotate(var(--rot)) scale(1.06); filter:blur(4px); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    #efe-layer{ display:none; }
+    .page-stars, .page-stars::after, .page-aurora,
+    .accretion-disk, .accretion-disk::after{
+        animation:none;
+    }
 }
 
 </style>
@@ -211,6 +413,26 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 
 <body>
 
+<div class="page-bg"></div>
+<div class="page-stars"></div>
+<div class="page-aurora"></div>
+
+<!-- turbulence warp: makes the equations look like torn spacetime -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="rip" x="-40%" y="-40%" width="180%" height="180%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.032"
+                      numOctaves="2" seed="3" result="n">
+            <animate attributeName="baseFrequency" dur="7s"
+                     values="0.018 0.032; 0.03 0.02; 0.018 0.032"
+                     repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="4"
+                           xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+</svg>
+
+<div id="efe-layer" aria-hidden="true"></div>
+
 <div class="hero">
 <div class="hero-bg"></div>
 <div class="accretion-disk"></div>
@@ -221,8 +443,8 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </div>
 </div>
 
-<p>
-Welcome.
+<p class="intro">
+I'm a physics student, an enthusiast, and a serial note-taker. This is one modest corner of the vast internet built for people who love physics and math &mdash; half a resource for you, half a logbook of the things I couldn't stop thinking about. No prerequisites, no gatekeeping: bring curiosity and a scientific mind, and the rest we'll derive from first principles.
 </p>
 
 <hr>
@@ -332,6 +554,189 @@ Mathematical Methods
 <hr>
 
 <h2><a href="miscellaneous/">Miscellaneous</a></h2>
+
+<script>
+// Randomly flare tiny handwritten physics equations in the page margins,
+// keeping clear of the central text column. Each blurs in, drifts, warps as if
+// spacetime is tearing, then dissolves. They are anchored in the document (so
+// they scroll with the page), and brushing one with the cursor crumbles it to
+// falling sand.
+(function () {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const layer = document.getElementById('efe-layer');
+
+    // Covariant / spooky-hep-th grab-bag. \n marks a multi-line vertical strip.
+    const FORMS = [
+        // Einstein field equations
+        'G<sub>&mu;&nu;</sub> + &Lambda;g<sub>&mu;&nu;</sub> = 8&pi;G&frasl;c<sup>4</sup> T<sub>&mu;&nu;</sub>',
+        'R<sub>&mu;&nu;</sub> &minus; &frac12;R g<sub>&mu;&nu;</sub> = 8&pi;G&frasl;c<sup>4</sup> T<sub>&mu;&nu;</sub>',
+        // Friedmann equations — two lines
+        '(&#x227;&frasl;a)<sup>2</sup> = 8&pi;G&frasl;3 &rho; &minus; k&frasl;a<sup>2</sup> + &Lambda;&frasl;3\n&auml;&frasl;a = &minus;4&pi;G&frasl;3 (&rho; + 3p) + &Lambda;&frasl;3',
+        // Schrodinger
+        'i&hbar; &part;<sub>t</sub>&psi; = &#x124;&psi;',
+        // Dirac (covariant)
+        '(i&gamma;<sup>&mu;</sup>&part;<sub>&mu;</sub> &minus; m)&psi; = 0',
+        // Maxwell (covariant)
+        '&part;<sub>&mu;</sub>F<sup>&mu;&nu;</sup> = &mu;<sub>0</sub>J<sup>&nu;</sup>',
+        // Maxwell (forms) — two lines
+        'd&#8902;F = &#8902;j\ndF = 0',
+        // Klein-Gordon (covariant)
+        '(&#x25A1; + m<sup>2</sup>)&phi; = 0',
+        // classical wave equation
+        '&part;<sup>2</sup>u&frasl;&part;t<sup>2</sup> = c<sup>2</sup> &nabla;<sup>2</sup>u',
+        // Gauss-Bonnet
+        '&#x1D4A2; = R<sup>2</sup> &minus; 4R<sub>&mu;&nu;</sub>R<sup>&mu;&nu;</sup> + R<sub>&mu;&nu;&rho;&sigma;</sub>R<sup>&mu;&nu;&rho;&sigma;</sup>',
+        // continuity
+        '&part;<sub>&mu;</sub>J<sup>&mu;</sup> = 0',
+        // conservation of stress tensor
+        '&nabla;<sub>&mu;</sub>T<sup>&mu;&nu;</sup> = 0',
+        // fine-structure constant
+        '&alpha; = 1&frasl;137',
+        // geodesic equation
+        '&#7821;<sup>&mu;</sup> + &Gamma;<sup>&mu;</sup><sub>&nu;&rho;</sub> &#7819;<sup>&nu;</sup>&#7819;<sup>&rho;</sup> = 0',
+        // Newton
+        'F = ma',
+        // Legendre transform to the Hamiltonian
+        'H = p q&#775; &minus; L',
+        // Hamilton's equations — two lines
+        'q&#775; = &part;H&frasl;&part;p\np&#775; = &minus;&part;H&frasl;&part;q',
+        // Hamilton-Jacobi
+        '&part;<sub>t</sub>S + H(q, &part;<sub>q</sub>S, t) = 0',
+        // eikonal equation
+        '|&nabla;S|<sup>2</sup> = n<sup>2</sup>',
+        // Schwarzschild radius
+        'R<sub>s</sub> = 2GM&frasl;c<sup>2</sup>',
+        // canonical commutator
+        '[x, p] = i&hbar;',
+        // uncertainty principle
+        '&Delta;x &Delta;p &ge; &hbar;&frasl;2',
+        // angular momentum algebra
+        '[L<sub>i</sub>, L<sub>j</sub>] = i&hbar; &epsilon;<sub>ijk</sub> L<sub>k</sub>',
+        // harmonic oscillator spectrum
+        'E<sub>n</sub> = (n + &frac12;) &hbar;&omega;',
+        // Lorentz algebra
+        '[M<sup>&mu;&nu;</sup>, M<sup>&rho;&sigma;</sup>] = i(&eta;<sup>&mu;&rho;</sup>M<sup>&nu;&sigma;</sup> &minus; &eta;<sup>&nu;&rho;</sup>M<sup>&mu;&sigma;</sup> &minus; &eta;<sup>&mu;&sigma;</sup>M<sup>&nu;&rho;</sup> + &eta;<sup>&nu;&sigma;</sup>M<sup>&mu;&rho;</sup>)',
+        // Poincare algebra [M, P]
+        '[M<sup>&mu;&nu;</sup>, P<sup>&rho;</sup>] = i(&eta;<sup>&mu;&rho;</sup>P<sup>&nu;</sup> &minus; &eta;<sup>&nu;&rho;</sup>P<sup>&mu;</sup>)',
+        // conformal algebra — three lines
+        '[D, P<sub>&mu;</sub>] = i P<sub>&mu;</sub>\n[D, K<sub>&mu;</sub>] = &minus;i K<sub>&mu;</sub>\n[K<sub>&mu;</sub>, P<sub>&nu;</sub>] = 2i(&eta;<sub>&mu;&nu;</sub>D &minus; M<sub>&mu;&nu;</sub>)',
+        // SUSY algebra with central extension — two lines
+        '{Q<sub>&alpha;</sub>, Q&#773;<sub>&beta;&#775;</sub>} = 2&sigma;<sup>&mu;</sup><sub>&alpha;&beta;&#775;</sub> P<sub>&mu;</sub>\n{Q<sub>&alpha;</sub>, Q<sub>&beta;</sub>} = &epsilon;<sub>&alpha;&beta;</sub> Z',
+        // partition function
+        'Z = &int; &#x1D49F;&phi; e<sup>&minus;S</sup>',
+        // field strength
+        'F = dA + A<sup>2</sup>',
+        // Chern-Simons
+        '&#x2112;<sub>CS</sub> = A dA + &frac23; A<sup>3</sup>',
+        // Ising CFT fusion rules — three lines, vertical strip
+        '&sigma; &times; &sigma; = 1 + &epsilon;\n&sigma; &times; &epsilon; = &sigma;\n&epsilon; &times; &epsilon; = 1',
+        // Navier-Stokes
+        '&rho;(&part;<sub>t</sub>v + v&middot;&nabla;v) = &minus;&nabla;p + &mu;&nabla;<sup>2</sup>v + f',
+        // Wilson line
+        'W = P Tr(&int; A)',
+        // Boltzmann entropy
+        'S = k<sub>B</sub> ln W',
+        // Bose-Einstein & Fermi-Dirac occupation — two lines
+        '&#10216;n&#10217;<sub>BE</sub> = 1&frasl;(e<sup>&beta;(&epsilon;&minus;&mu;)</sup> &minus; 1)\n&#10216;n&#10217;<sub>FD</sub> = 1&frasl;(e<sup>&beta;(&epsilon;&minus;&mu;)</sup> + 1)',
+        // first law of thermodynamics
+        'T dS = dE + P dV &minus; &mu; dN + &hellip;',
+        // generalized second law
+        'dS<sub>gen</sub>&frasl;dt &ge; 0',
+        // Bekenstein-Hawking entropy
+        'S = A&frasl;4G<sub>N</sub>',
+        // von Neumann entropy
+        'S<sub>vN</sub> = &minus;Tr(&rho; log &rho;)',
+        // AdS/CFT (with a questioning equals sign)
+        'Z<sub>AdS</sub> =<sup>?</sup> Z<sub>CFT</sub>',
+        // tachyon mass
+        'm<sub>tach</sub><sup>2</sup> = &minus;4&frasl;&alpha;&prime;'
+    ];
+
+    const CENTER_HALF = 520;  // px: half-width of the protected central column
+    const MAX = 3;            // max concurrent equations
+    let live = 0;
+
+    const rand = (a, b) => a + Math.random() * (b - a);
+
+    // idempotent teardown: only removes / decrements once
+    function finish(el) {
+        if (el._done) return;
+        el._done = true;
+        clearTimeout(el._life);
+        el.remove();
+        live--;
+    }
+
+    // dissolve an equation on hover: the usual blur-and-fade
+    function dissolve(el) {
+        if (el._done || el._dissolving) return;
+        el._dissolving = true;
+        clearTimeout(el._life);
+
+        // Capture the current animated values WHILE the keyframes are still
+        // running (getComputedStyle is live, so read these before touching it),
+        // pin them as inline styles, then drop the animation so it doesn't snap
+        // back to the base opacity:0.
+        const cs = getComputedStyle(el);
+        const frozen = cs.transform === 'none' ? '' : cs.transform;
+        const curOpacity = cs.opacity;
+        el.style.transform = frozen;
+        el.style.opacity = curOpacity;
+        el.style.filter = 'blur(0px)';
+        el.style.animation = 'none';
+        void el.offsetWidth;                 // commit the pinned state
+        el.style.transition = 'opacity 0.55s ease, transform 0.6s ease, filter 0.6s ease';
+        el.style.opacity = '0';
+        el.style.filter = 'blur(4px)';
+        el.style.transform = frozen + ' translateY(-8px) scale(1.05)';
+        setTimeout(() => finish(el), 620);
+    }
+
+    function spawn() {
+        if (live < MAX) {
+            const vw = innerWidth, vh = innerHeight;
+            const gutter = vw / 2 - CENTER_HALF;   // free space each side
+            if (gutter > 70) {
+                const raw = FORMS[Math.floor(Math.random() * FORMS.length)];
+                const el = document.createElement('div');
+                el.className = 'efe';
+                el.innerHTML = '<span class="efe-eq">' + raw.split('\n').join('<br>') + '</span>';
+                const size = rand(13, 26);          // microscopic-ish
+                el.style.fontSize = size + 'px';
+                el.style.setProperty('--rot', rand(-13, 13).toFixed(1) + 'deg');
+                el.style.setProperty('--peak', rand(0.5, 0.92).toFixed(2));
+                const life = rand(4.5, 8.5);
+                el.style.animation = 'efe-life ' + life.toFixed(2) + 's ease-in-out forwards';
+                el.addEventListener('mouseenter', () => dissolve(el));
+                layer.appendChild(el);
+
+                const w = el.offsetWidth || 130;
+                const h = el.offsetHeight || size;
+                const side = Math.random() < 0.5 ? 'left' : 'right';
+                let x;
+                if (side === 'left') {
+                    x = rand(6, Math.max(6, gutter - w - 6));
+                } else {
+                    const lo = vw - gutter + 6;
+                    x = rand(lo, Math.max(lo, vw - w - 6));
+                }
+                el.style.left = x + 'px';
+                // anchor within the document at the currently-visible band, so it
+                // sits in view now but scrolls away with the page
+                el.style.top = (window.scrollY + rand(12, Math.max(40, vh - h - 24))) + 'px';
+
+                live++;
+                el._life = setTimeout(() => finish(el), life * 1000 + 60);
+            }
+        }
+        // rarer now: roughly one every 5-13s
+        setTimeout(spawn, rand(5500, 13000));
+    }
+
+    setTimeout(spawn, 1500);
+})();
+</script>
 
 </body>
 

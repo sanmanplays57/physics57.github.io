@@ -1,10 +1,92 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Classical Mechanics</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400&display=swap');
+    </style>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            /* the wobble filter is applied here and driven by the mouse */
+            filter: url(#wobble);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .content {
+            position: relative;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px 40px;
+            background: rgba(15, 20, 35, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            font-family: Georgia, serif;
+            opacity: 0;
+            animation: fadeInUp 0.9s ease-out forwards;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 200;
+            letter-spacing: 0.1em;
+            color: #FFFFFF;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        p, li {
+            color: #E8EEF7;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        ul { line-height: 1.9; }
+
+        a { color: #79D4FF; text-decoration: none; }
+        a:hover { color: #B7EBFF; text-decoration: underline; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .content { animation: none; opacity: 1; }
+        }
+    </style>
 </head>
 
 <body>
+
+<!-- SVG wobble filter: turbulence + displacement, scale driven by the mouse -->
+<svg width="0" height="0" style="position:absolute">
+    <filter id="wobble">
+        <feTurbulence id="wobble-turb" type="fractalNoise"
+                      baseFrequency="0.008 0.012" numOctaves="2"
+                      seed="7" result="noise"/>
+        <feDisplacementMap id="wobble-disp" in="SourceGraphic" in2="noise"
+                           scale="0" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+</svg>
+
+<!-- pre-baked forward+reverse boomerang: seamless loop, no reverse-seeking on the CPU -->
+<video id="bg-video" src="do_the_same_thing_boomerang.mp4" autoplay muted loop playsinline></video>
+
+<div class="content">
 
 <h1>Classical Mechanics</h1>
 
@@ -19,6 +101,44 @@
 </ul>
 
 <p><a href="../">← Back to Things</a></p>
+
+</div>
+
+<script>
+// The video is a pre-rendered forward+reverse boomerang, so a plain native
+// `loop` gives the seamless back-and-forth with zero reverse-seeking cost.
+
+// ---- Wobbly mouse effect ----------------------------------------------------
+// Moving the mouse energizes a turbulence/displacement wobble on the video;
+// the faster you move, the more it ripples, and it settles back to calm.
+(function () {
+    const disp = document.getElementById('wobble-disp');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let target = 0;      // desired wobble strength from recent mouse motion
+    let current = 0;     // smoothed strength actually applied
+    let lastX = null, lastY = null;
+    const MAX = 45;
+
+    addEventListener('mousemove', (e) => {
+        if (lastX !== null) {
+            const speed = Math.hypot(e.clientX - lastX, e.clientY - lastY);
+            target = Math.min(MAX, target + speed * 0.6);
+        }
+        lastX = e.clientX;
+        lastY = e.clientY;
+    });
+
+    function tick() {
+        // ease current toward target, and bleed target back down to rest
+        current += (target - current) * 0.12;
+        target *= 0.92;
+        disp.setAttribute('scale', current.toFixed(2));
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+})();
+</script>
 
 </body>
 </html>
