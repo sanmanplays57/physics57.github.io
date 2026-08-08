@@ -28,9 +28,122 @@
 
 <p class="subtitle">by Sarah Hoback, Daniel L. Jafferis, Zixia Wei</p>
 
-<p>Coming soon...</p>
+<h2>Prerequisites</h2>
 
-<p class="back"><a href="index.html">← Back to Study with me</a></p>
+<p>AdS/CFT basics, BCFT basics.</p>
+
+<h2>Summary</h2>
+
+<p>Within BTZ spacetime</p>
+
+<div class="hero-eq">
+$$ds^2 = -\frac{4}{(1+uv)^2}\,du\,dv + r_h^2\,\frac{(1-uv)^2}{(1+uv)^2}\,d\phi^2 \tag{1}$$
+</div>
+
+<p>lies a locally dS$_2$ hypersurface</p>
+
+<div class="hero-eq">
+$$u(v) = -\frac{1+\alpha v}{\alpha + v}\,, \qquad u < v \tag{2}$$
+</div>
+
+<p>whose holography is studied in this paper. If the theory is pure AdS$_3$ gravity with the above hypersurface acting as an EOW brane $Q$ with $R_Q \sim T^2 - 1$ so that $T > 1$ is dS$_2$, then there exist no real Euclidean saddles with the EOW brane reaching a non-trivial asymptotic boundary, but there are complex saddles.</p>
+
+<figure>
+    <div class="diagram">
+        <svg viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="Penrose diagram of a two-sided BTZ black hole with a de Sitter two-brane running from the past singularity to future timelike infinity on the left boundary">
+
+            <defs>
+                <clipPath id="physical">
+                    <path d="M 90 60 L 390 60 L 390 360 L 151 360 C 148 315, 122 255, 90 210 Z"/>
+                </clipPath>
+                <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#97A3B6"/>
+                </marker>
+                <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5"
+                        markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#2DD4BF"/>
+                </marker>
+            </defs>
+
+            <!-- the surviving spacetime -->
+            <path d="M 90 60 L 390 60 L 390 360 L 151 360 C 148 315, 122 255, 90 210 Z"
+                  fill="rgba(45,212,191,0.06)"/>
+
+            <!-- horizons, drawn only where spacetime exists -->
+            <g clip-path="url(#physical)" stroke="#97A3B6" stroke-width="1.4"
+               stroke-dasharray="7 5" opacity="0.85">
+                <line x1="90" y1="60"  x2="390" y2="360"/>
+                <line x1="90" y1="360" x2="390" y2="60"/>
+            </g>
+
+            <!-- singularities -->
+            <g fill="none" stroke="#FF8A5B" stroke-width="2.2">
+                <path d="M 90 60 q 8 -6 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 L 390 60"/>
+                <path d="M 151 360 q 8 -6 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 t 16 0 L 390 360"/>
+            </g>
+
+            <!-- AdS boundaries: the left one survives only above i+ -->
+            <g stroke="#2DD4BF" stroke-width="2.4">
+                <line x1="390" y1="60" x2="390" y2="360"/>
+                <line x1="90"  y1="60" x2="90"  y2="210"/>
+            </g>
+
+            <!-- the dS2 end-of-the-world brane -->
+            <path d="M 151 360 C 148 315, 122 255, 90 210"
+                  fill="none" stroke="#FFD166" stroke-width="3.2"/>
+
+            <!-- asymptotic boundary time -->
+            <line x1="424" y1="330" x2="424" y2="86" stroke="#2DD4BF"
+                  stroke-width="1.4" marker-end="url(#arrow-teal)"/>
+            <text x="430" y="80" fill="#2DD4BF" font-size="13" font-style="italic">t</text>
+
+            <!-- null directions -->
+            <g stroke="#97A3B6" stroke-width="1.3" marker-end="url(#arrow)">
+                <line x1="228" y1="182" x2="192" y2="146"/>
+                <line x1="252" y1="182" x2="288" y2="146"/>
+            </g>
+            <text x="180" y="140" fill="#97A3B6" font-size="13" font-style="italic">v</text>
+            <text x="292" y="140" fill="#97A3B6" font-size="13" font-style="italic">u</text>
+
+            <!-- labels -->
+            <text x="292" y="48"  fill="#FF8A5B" font-size="12">singularity</text>
+            <text x="242" y="382" fill="#FF8A5B" font-size="12">singularity</text>
+            <text x="138" y="330" fill="#FFD166" font-size="12.5" text-anchor="end">dS EOW brane</text>
+            <text x="138" y="348" fill="#FFD166" font-size="12.5" text-anchor="end" font-style="italic">Q</text>
+            <text x="60"  y="206" fill="#E8EEF7" font-size="13" font-style="italic">i<tspan font-size="10" dy="-5" font-style="normal">+</tspan></text>
+            <text x="300" y="215" fill="#97A3B6" font-size="12">horizon</text>
+        </svg>
+    </div>
+    <figcaption>
+        Sketch of the Lorentzian geometry, after Fig. 1 (left panel) of the paper.
+        The <b class="amber">dS$_2$ EOW brane $Q$</b> runs from the past
+        singularity up to $i^+$, where it meets the
+        <b class="teal">left AdS boundary</b> &mdash; so the expanding dS universe
+        on its worldvolume is screened from the right boundary by the
+        <b>horizon</b>. $u,v$ are the Kruskal null directions and $t$ is the
+        asymptotic boundary time.
+    </figcaption>
+</figure>
+
+<p>Pure Euclidean AdS$_3$ i.e. brane tension $T = 0$ is conformal to a half ball $\rho \in (-\infty, 0]$: adding the brane adds a cylinder of length $\rho_*$ to the end of the half ball with $T = \tanh\rho_* <1 $. Complexifying $\rho$ gives access to $T > 1$ and then using GKP-W the gravitational path integral is performed first with disk and then with cylinder as the asymptotic boundary.</p>
+
+<p>There are two solutions associated with two branches of the analytic continuation of $\rho$</p>
+
+<div class="hero-eq">
+$$\rho = \operatorname{arccoth} T \pm i\frac{\pi}{2} \equiv \rho_*^{\pm} \tag{12}$$
+</div>
+
+<p>which leads to two boundary conditions (boundary states $|B\rangle$ and $|\bar{B} \rangle$) on the two boundaries of the cylinder. Due to time reflection symmetry, only the case with two different boundary states contribute, and calculating the holographic energy-momentum tensor reveals that the scaling dimension is negative:</p>
+
+<div class="hero-eq">
+$$h^{B\bar{B}}_{\rm bcc} = -\frac{c}{8}$$
+</div>
+
+<p>So it is a unitary CFT with a non-unitary boundary condition (in the sense that the expansion of the boundary state in terms of Ishibashi states has complex coefficients) or in other words: in the closed string channel it is unitary but not in the open one.</p>
+
+<p class="back"><a href="index.html">&larr; Back to Study with me</a></p>
 
 </div>
 
