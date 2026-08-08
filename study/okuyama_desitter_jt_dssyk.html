@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2505.08116 de Sitter JT gravity from double-scaled SYK</title>
+
+    <link rel="stylesheet" href="paper.css">
+
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']]
+        }
+    };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+
+<body>
+
+<div class="hero-glow"></div>
+
+<div class="wrap">
+
+<h1><a href="https://arxiv.org/abs/2505.08116">2505.08116</a> de Sitter JT gravity from double-scaled SYK</h1>
+
+<p class="subtitle">by Kazumi Okuyama</p>
+
+<h2>Prerequisites</h2>
+
+<p>dS basics, JT gravity-matrix model basics, <a href="../resources/quantum_gravity/SYK/">DSSYK basics</a>.</p>
+
+<h2>Summary</h2>
+
+<p>Okuyama hints at <a href="https://arxiv.org/abs/2411.16922">yet another way</a> of doing dS$_2$ holography out of the Double-Scaled-Sachdev-Ye-Kitaev (DSSYK) model. Recall in DSSYK the energy spectrum was</p>
+
+<div class="hero-eq">
+$$E(\theta) = -E_0\cos\theta$$
+</div>
+
+<p>The lower edge of the spectrum $\theta \to 0$ is a stable saddle which <a href="https://arxiv.org/abs/2208.07032">gives AdS$_2$-JT gravity in the triple scaling limit</a> $\lambda \to 0$, $\theta \to 0$ with $k = \theta/\lambda$ fixed (3.17). Okuyama essentially shows the unstable saddle $\theta = \pi$ gives dS$_2$-JT in the triple scaling</p>
+
+<div class="hero-eq">
+$$\lambda \to 0, \quad \theta \to \pi \quad \text{with} \quad k = \frac{\pi - \theta}{\lambda} : \text{fixed} \tag{4.1}$$
+</div>
+
+<p>The proof methodology is simple:</p>
+
+<div class="steps">
+
+<p><b>1.</b> Get the DSSYK disk partition function from the <a href="https://arxiv.org/abs/1811.02584">literature</a>:</p>
+
+<div class="hero-eq">
+$$\mathcal{Z}(\beta) = \int_0^\pi \frac{d\theta}{2\pi}\, \mu(\theta)\, e^{-\beta E(\theta)} \tag{2.4}$$
+</div>
+
+<p>with $\mu(\theta) = (q, e^{\pm 2i\theta}; q)_\infty$, where $q = e^{-\lambda}$ and $E_0 = 2\mathcal{J}/\sqrt{1-q}$.</p>
+
+<p><b>2.</b> Express it as an <a href="https://arxiv.org/abs/2209.02131">ETH matrix integral</a> ensemble average in the $L \to \infty$ limit:</p>
+
+<div class="hero-eq">
+$$\mathcal{Z}_{0,1}(\beta) = \lim_{L \to \infty} \frac{1}{L} \big\langle \operatorname{Tr} e^{-\beta H} \big\rangle, \qquad \big\langle f(H) \big\rangle = \frac{1}{\mathcal{Z}} \int dH\, e^{-L \operatorname{Tr} V(H)} f(H) \tag{2.14, 2.15}$$
+</div>
+
+<p>where $L = 2^{N/2}$, the normalization is $\mathcal{Z} = \int dH\, e^{-L \operatorname{Tr} V(H)}$, and the potential $V(H)$ is fixed by matching the genus-zero eigenvalue density of the matrix model to $\mu(\theta)$.</p>
+
+<p><b>3.</b> Take the triple scaling.</p>
+
+<p><b>4.</b> Realize you obtained the JT gravity partition function. Around $\theta = \pi$ the Gaussian comes out with the wrong sign</p>
+
+<div class="hero-eq">
+$$\tilde{Z}_{0,1}(\tilde{\beta}) = \frac{1}{\sqrt{2\pi(-\tilde{\beta}/\gamma)^3}}\, e^{\frac{2\pi^2\gamma}{\tilde{\beta}}}, \qquad (\tilde{\beta} = -\beta < 0) \tag{4.6}$$
+</div>
+
+<p>with $\gamma = 1/(E_0\lambda^2)$ &mdash; exactly the disk amplitude of de Sitter JT gravity.</p>
+
+</div>
+
+<p>The above eqns are for the disc but has been done for arbitrary genus in the main paper.</p>
+
+<p>He also constructs an explicit solution in sine dilaton gravity whose ADM Mass matches the DSSYK spectrum and shows that the metric becomes negative AdS$_2$ i.e. <a href="https://arxiv.org/abs/1904.01911">equivalent to</a> dS$_2$ in the triple scaling limit.</p>
+
+<h2>Details of the calculations</h2>
+
+<p>Coming soon...</p>
+
+<p class="back"><a href="index.html">&larr; Back to Study with me</a></p>
+
+</div>
+
+</body>
+</html>
