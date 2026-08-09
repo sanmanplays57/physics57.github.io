@@ -1,0 +1,4 @@
+# manim render artifacts (regenerate with the command in manim/*.py)
+manim/media/
+__pycache__/
+*.pyc
