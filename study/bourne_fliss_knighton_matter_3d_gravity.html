@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2607.01319 What's the Matter with 3D Gravity?</title>
+
+    <link rel="stylesheet" href="paper.css">
+
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']]
+        }
+    };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+
+<body>
+
+<div class="hero-glow"></div>
+
+<div class="wrap">
+
+<h1><a href="https://arxiv.org/abs/2607.01319">2607.01319</a> What's the Matter with 3D Gravity?</h1>
+
+<p class="subtitle">by Robert Bourne, Jackson R. Fliss, Bob Knighton</p>
+
+<h2>Prerequisites</h2>
+
+<p><a href="https://arxiv.org/abs/2304.13650">Virasoro TQFT</a>, <a href="https://arxiv.org/abs/2302.12281">basic</a> <a href="https://arxiv.org/abs/2304.02668">familiarity</a> <a href="https://arxiv.org/abs/2407.09608">with</a> <a href="https://arxiv.org/abs/2503.08657">Wilson</a> <a href="https://arxiv.org/abs/2507.05364">spools</a>.</p>
+
+<h2>Summary</h2>
+
+<p>Using <a href="https://arxiv.org/abs/2212.08270">Witten's phase space</a> of AdS$_3$ gravity + minimally coupled scalar</p>
+
+<div class="hero-eq">
+$$T^*\big(\text{Met}(\Sigma) \times \Phi_\Sigma\big)\big/\text{Weyl}(\Sigma) \rtimes \text{Diff}(\Sigma) \tag{3.3}$$
+</div>
+
+<p>they do geometric quantization, i.e. consider the Hilbert space of 3d gravity + matter as sections of a line bundle $\mathscr{L} = \mathcal{L}^k$ whose 1st Chern class $c_1$ equals the symplectic 2-form $\omega$ of the classical phase space</p>
+
+<div class="hero-eq">
+$$c_1(\mathcal{L}) = \frac{1}{4\pi}\big[\omega_{\text{WP}}\big] \tag{3.22}$$
+</div>
+
+<p>Here $\Sigma$ is the initial time slice, $\text{Met}(\Sigma)$ the metrics on it and $\Phi_\Sigma$ the scalar configurations on it, and $k = \ell/16G_N$ with $c = 24k$ the Brown-Henneaux central charge.</p>
+
+<p>Next note that the free scalar QFT can be rewritten as QM using the worldline formalism: trade the path integral  over $\phi$ for a path integral over worldlines $x : \text{S}^1 \to M$ in the bulk three-manifold $M$, for a relativistic point particle of mass $m$</p>
+
+<div class="hero-eq">
+$$\int \mathcal{D}\phi\, e^{-S[g,\phi]} = \exp\left(\int \mathcal{D}x\, e^{-S_{\text{worldline}}[g,x]}\right) \tag{3.6}$$
+$$S_{\text{worldline}}[g,x] = \frac{\mu}{\ell}\int d\tau, \qquad \mu = 1 + \sqrt{m^2\ell^2+1} \tag{3.7, 3.8}$$
+</div>
+
+<p>So the geometrically quantized Hilbert space is the one on a slice $\Sigma$ with $n$ conical defects created by the &ldquo;particles&rdquo; corresponding to the scalar field via the WL formalism. Each defect has deficit angle $\theta = 8\pi G_N \mu/\ell$, and the $n$-particle phase space is built from </p>
+
+<div class="hero-eq">
+$$\mathcal{M}_{\text{grav},n} = \mathcal{T}_{\Sigma,n,\theta} \times \overline{\mathcal{T}}_{\Sigma,n,\theta} \tag{"3.13"}$$
+</div>
+
+<p>Sections of $\mathscr{L}$ over $\mathcal{T}_{\Sigma,n,\theta}$ are $n$-point chiral conformal blocks with insertions of weight $h = \frac{c}{24}(1-\alpha_\theta^2) = \frac{\mu}{2} - \frac{G_N\mu^2}{\ell}$, where $\alpha_\theta = 1 - \theta/2\pi$; call the left-times-right space of these, before any MCG projection, $\mathcal{H}^0_{\text{grav},n}$.</p>
+
+<p>Next, following the <a href="https://arxiv.org/abs/2304.13650">VTQFT paper</a> for pure gravity, we have to gauge large diffs, i.e. mod out by the MCG, which is implemented via the projector</p>
+
+<div class="hero-eq">
+$$\frac{1}{|\text{Map}(\Sigma,n)|}\sum_{g \in \text{Map}(\Sigma,n)} g \tag{4.5}$$
+</div>
+
+<p>Finally the total Hilbert space is a direct sum of the $n$-particle Hilbert spaces for all $n$</p>
+
+<div class="hero-eq">
+$$\mathcal{H}_{\text{grav}+\text{matter}} = \bigoplus_{n=0}^{\infty} \mathcal{H}_{\text{grav},n}, \qquad \mathcal{H}_{\text{grav},n} \equiv \mathcal{H}^0_{\text{grav},n}\big/\text{Map}(\Sigma,n) \tag{3.27}$$
+</div>
+
+<p>However if $n > n_{\text{crit}}$, then the conical deficits close up and we cross the black-hole threshold, which takes us to the non-perturbative in $G_N$ regime</p>
+
+<div class="hero-eq">
+$$n_{\text{crit}} = \left\lfloor \frac{2\pi}{\theta} \right\rfloor = \left\lfloor \frac{\ell}{4G_N\mu} \right\rfloor \tag{5.4}$$
+</div>
+
+<p>where the fused defect has weight exactly $c/24$. So for the perturbative Hilbert space we truncate at $n = n_{\text{crit}}$.</p>
+
+<p>Naively the partition function diverges because the Hamiltonian vanishes as a constraint due to diff invariance, so $Z[\Sigma \times \text{S}^1] = \dim \mathcal{H}_{\text{grav}+\text{matter}}$, which is infinite once the Alekseev-Shatashvili boundary modes are there. But the boundary Hamiltonians are non-trivial, therefore they consider the partition function</p>
+
+<div class="hero-eq">
+$$Z(\tau,\bar\tau) = \operatorname{Tr}_{\mathcal{H}_{\text{grav}+\text{matter}}}\left(q^{L_0}\,\bar{q}^{\,\bar{L}_0}\right), \qquad q = e^{2\pi i \tau},\; \bar{q} = e^{-2\pi i \bar\tau} \tag{4.2}$$
+</div>
+
+<p>with $L_0, \bar{L}_0$ the Virasoro generators dilating and rotating the boundary circle. This is evaluated via some algebraic geometry tools: there is this equivariant Euler characteristic</p>
+
+<div class="hero-eq">
+$$\chi(gq^{L_0}, \mathscr{L}) = \sum_{i=0}^{\infty} (-1)^i \operatorname{Tr}_{\text{H}^i(\mathcal{T}_{\Sigma,n,\theta},\,\mathscr{L})}\left(gq^{L_0}\right) \tag{4.6}$$
+</div>
+
+<p>where all the terms except $i = 0$ vanish by <a href="https://en.wikipedia.org/wiki/Kodaira_vanishing_theorem">Kodaira vanishing</a> at large $k$, so the trace we actually want <em>is</em> $\chi$, and $\chi$ is computable by an index theorem.</p>
+
+<p>(will add more details later...)</p>
+
+<p>Finally they have an expression for the full perturbative partition function on thermal AdS$_3$, which is the main result of the paper</p>
+
+<div class="hero-eq">
+$$Z_{\text{pert}}(\tau,\bar\tau) = |q|^{-c/12}\prod_{m=2}^{\infty}\frac{1}{|1-q^m|^2}\sum_{n=0}^{\lfloor \ell/4G_N\mu \rfloor}|q|^{2h(n)}\prod_{r=1}^{n}\sum_{\{\ell_1,\ldots,\ell_n\}}\frac{1}{\ell_r!\,r^{\ell_r}}\frac{1}{|1-q^r|^{2\ell_r}} \tag{4.18}$$
+</div>
+
+<p>with the internal sum over partitions $\sum_{r=1}^{n} r\ell_r = n$, where $\ell_r$ counts the $r$-cycles of the permutation (not to be confused with the AdS radius $\ell$), and</p>
+
+<div class="hero-eq">
+$$2h(n) = n\mu - \frac{2n^2 G_N \mu^2}{\ell} \tag{4.24}$$
+</div>
+
+<p>The $n^2$ correction is the new thing &mdash; it is the pairwise gravitational binding energy of the $n$ point particles, $\Delta E_n = -\binom{n}{2}\frac{4G_N\mu^2}{\ell}$, and Taylor expanding $|q|^{2h(n)}$ in $G_N$ generates the entire loop expansion. Dropping it, i.e. $|q|^{2h(n)} \to |q|^{n\mu}$, they compare to <a href="https://arxiv.org/abs/0804.1773">GMY</a> and recover the known one-loop answer</p>
+
+<div class="hero-eq">
+$$Z_{\text{grav,1-loop}} = |q|^{-c/12}\prod_{m=2}^{\infty}\frac{1}{|1-q^m|^2} \tag{4.26}$$
+$$Z_{\text{scalar,1-loop}} = \prod_{l,\bar{l}=0}^{\infty}\frac{1}{1-q^{\mu/2+l}\,\bar{q}^{\,\mu/2+\bar{l}}}$$
+</div>
+
+<p>They also do a non-perturbative resummation of this all-orders-in-$G_N$ series (will add more details later), finding that the first non-perturbative correction sits at order $|q|^{c/12} = e^{-\beta/8G_N}$, i.e. exactly at the BTZ threshold.</p>
+
+<h2>Details of the calculations</h2>
+
+<p>Coming soon...</p>
+
+<p class="back"><a href="index.html">&larr; Back to Study with me</a></p>
+
+</div>
+
+</body>
+</html>

@@ -87,7 +87,26 @@ $$V(H) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n}\, q^{\frac{n^2}{2}} \big(q^{\f
 
 <p>with $T_n$ the Chebyshev polynomial of the first kind, and the higher genus partition functions follow via topological recursion just like in <a href="https://arxiv.org/abs/1903.11115">Saad-Shenker-Stanford</a>.</p>
 
-<p>The author also constructs an explicit solution in sine dilaton gravity whose ADM Mass matches the DSSYK spectrum and shows that the metric becomes negative AdS$_2$ i.e. <a href="https://arxiv.org/abs/1904.01911">equivalent to</a> dS$_2$ in the triple scaling limit.</p>
+<p>The author also constructs an explicit solution in sine dilaton gravity (dilaton gravity with potential $W(\Phi) = 2\sin\Phi$) whose ADM mass matches the DSSYK spectrum. In the gauge where the dilaton is the radial coordinate, $\Phi(r) = r$, the solution is</p>
+
+<div class="hero-eq">
+$$ds^2 = A(r)\, d\tau^2 + \frac{dr^2}{A(r)} \tag{5.4}$$
+$$A(r) = 2\cos\theta - 2\cos r \tag{5.6}$$
+</div>
+
+<p>with $\theta$ an integration constant labelling the solution, and ADM energy $E = -\lambda^{-1}\cos\theta$, matching $E(\theta)$ once $E_0 = \lambda^{-1}$. For generic $\theta$ this is a Euclidean black hole with a horizon at $r = \theta$. Taking the near-horizon limit $r \to \theta$ with $u = r - \theta$,</p>
+
+<div class="hero-eq">
+$$A(r) = 2u\sin\theta + u^2\cos\theta + \mathcal{O}(u^3) \tag{5.8}$$
+</div>
+
+<p>the $\mathcal{O}(u)$ term survives except at the two triple scaling points $\theta = 0, \pi$, where $A = \pm u^2$ and</p>
+
+<div class="hero-eq">
+$$ds^2 = \pm\left(u^2 d\tau^2 + \frac{du^2}{u^2}\right) \tag{5.10}$$
+</div>
+
+<p>The bracket is Euclidean AdS$_2$ in Poincar&eacute; coordinates. The upper sign is $\theta = 0$; the lower sign is $\theta = \pi$, so the near horizon limit of the metric there becomes negative AdS$_2$, which has constant positive curvature and is hence <a href="https://arxiv.org/abs/1904.01911">equivalent to</a> dS$_2$.</p>
 
 <h2>Details of the calculations</h2>
 
