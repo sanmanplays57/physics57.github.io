@@ -30,17 +30,17 @@
 
 <h2>Prerequisites</h2>
 
-<p>Shockwave geometries and the butterfly effect, <a href="https://arxiv.org/abs/hep-th/9203082">Kabat-Ortiz</a> eikonal quantum gravity.</p>
+<p><a href="https://arxiv.org/abs/hep-th/9802150">Basics</a> of AdS/CFT, <a href="https://arxiv.org/abs/hep-th/9203082">Kabat-Ortiz</a> eikonal quantum gravity.</p>
 
 <h2>Summary</h2>
 
-<p>Consider the eternal AdS-Schwarzschild geometry</p>
+<p>Consider the eternal AdS$_{d+1}$-Schwarzschild geometry</p>
 
 <div class="hero-eq">
 $$ds^2 = -a(uv)\,du\,dv + r^2(uv)\,dx^i dx^i \tag{5}$$
 </div>
 
-<p>where $u,v$ are Kruskal coordinates and the $x^i$ are the coordinates transverse to the $u$-$v$ plane, $i$ running over $d-1$ values for bulk dimension $D = d+1$. The two components of the horizon sit at $u = 0$ and $v = 0$ and meet at the bifurcation surface $u = v = 0$, where $a_0 = a(0)$ and $r_0 = r(0)$.</p>
+<p>where $u,v$ are Kruskal coordinates and the $x^i$ are the $d-1$ transverse coordinates. The horizons are at $u = 0$ and $v = 0$, and they meet at the bifurcation surface $u = v = 0$, where $a_0 = a(0)$ and $r_0 = r(0)$.</p>
 
 <p>They evaluate the 4-point function of single trace CFT operators acting on the right boundary</p>
 
@@ -48,7 +48,7 @@ $$ds^2 = -a(uv)\,du\,dv + r^2(uv)\,dx^i dx^i \tag{5}$$
 $$D(\{t_i,x_i\}) = \big\langle V_{x_1}(t_1)\, W_{x_2}(t_2)\, V_{x_3}(t_3)\, W_{x_4}(t_4) \big\rangle \tag{7}$$
 </div>
 
-<p>where the expectation value is taken in the TFD state, and there is no implicit time ordering &mdash; the operators are ordered as written. One then imposes OTOC kinematics, i.e. the $V$ insertions at $(x_1,t_1) \approx (x_3,t_3)$ and the $W$ insertions at $(x_2,t_2) \approx (x_4,t_4)$, with $V$ and $W$ separated by a time scale much larger than the thermal time, $t_1 - t_2 \gg \beta$.</p>
+<p>where the expectation value is taken in the TFD state. One then imposes OTOC kinematics, i.e. the $V$ insertions at $(x_1,t_1) \approx (x_3,t_3)$ and the $W$ insertions at $(x_2,t_2) \approx (x_4,t_4)$, with $V$ and $W$ separated by a time scale much larger than the thermal time, $t_1 - t_2 \gg \beta$.</p>
 
 <p>The final form is then</p>
 
@@ -56,7 +56,7 @@ $$D(\{t_i,x_i\}) = \big\langle V_{x_1}(t_1)\, W_{x_2}(t_2)\, V_{x_3}(t_3)\, W_{x
 $$D(\{t_i,x_i\}) = \frac{a_0^4}{(4\pi)^2}\int e^{i\delta(s,|x-x'|)}\Big[p_1^u\,\psi_1^*(p_1^u,x)\,\psi_3(p_1^u,x)\Big]\Big[p_2^v\,\psi_2^*(p_2^v,x')\,\psi_4(p_2^v,x')\Big] \tag{8}$$
 </div>
 
-<p>where the integral runs over the transverse positions $x,x'$ with measure factors $r_0^{d-1}$ and over the null momenta $p_1^u, p_2^v$. Each wave function is a Fourier transform of a bulk-to-boundary propagator along one of the two horizons,</p>
+<p>where the integral runs over the transverse positions $x,x'$ with measure factors $r_0^{d-1}$ and over the null momenta $p_1^u, p_2^v$. Each wave function is a Fourier transform of a bulk-to-boundary propagator with respect to a null coordinate, in exchange for the large null momentum,</p>
 
 <div class="hero-eq">
 $$\psi_1(p^u,x) = \int dv\, e^{ia_0p^uv/2}\,\big\langle \phi_v(u,v,x)\, V_{x_1}(t_1)^\dagger \big\rangle\big|_{u=0} \tag{10}$$
@@ -64,7 +64,7 @@ $$\psi_1(p^u,x) = \int dv\, e^{ia_0p^uv/2}\,\big\langle \phi_v(u,v,x)\, V_{x_1}(
 
 <p>and similarly for $\psi_2,\psi_3,\psi_4$ (11-13), where $\phi_v$ is the bulk field dual to the boundary operator $V$ (and $\phi_w$ the one dual to $W$). The $\delta$ is a phase, and also a two-to-two scattering amplitude, a function of the transverse separation $b = |x-x'|$ and of the Mandelstam-like variable $s = a_0\,p_1^u p_2^v$.</p>
 
-<p>Then, in the elastic eikonal approximation, they get for $\delta$</p>
+<p>Then, in the <a href="https://arxiv.org/abs/hep-th/9203082">elastic eikonal approximation</a>, they get for $\delta$</p>
 
 <div class="hero-eq">
 $$\delta(s,b) = \frac{4\pi G_N}{r_0^{d-3}}\, s\, f(b) \tag{35}$$
@@ -72,13 +72,15 @@ $$\delta(s,b) = \frac{4\pi G_N}{r_0^{d-3}}\, s\, f(b) \tag{35}$$
 
 <p>with $f$ the transverse profile of the shock, solving $(-\partial_x^2 + \mu^2)f(x) = \delta^{d-1}(x)$ with $\mu^2 = 2\pi(d-1)r_0/\beta$, so that $f(b) \sim e^{-\mu b}$ at large $b$.</p>
 
-<p>Finally, for Rindler AdS$_3$ in particular &mdash; where the geometry is a piece of pure AdS$_3$ and so the bulk-to-boundary propagator is known exactly &mdash; the 4-point function gives</p>
+<p>For Rindler AdS$_3$, the 4-point function gives</p>
 
 <div class="hero-eq">
 $$\frac{\langle V(i\epsilon_1)W(t+i\epsilon_2)V(i\epsilon_3)W(t+i\epsilon_4)\rangle}{\langle V(i\epsilon_1)V(i\epsilon_3)\rangle\,\langle W(i\epsilon_2)W(i\epsilon_4)\rangle} = \left(\frac{1}{1 - \frac{8\pi i G_N \Delta_w}{\epsilon_{13}\epsilon_{24}^*}e^{t - |x_1-x_2|}}\right)^{\Delta_v} \tag{51}$$
 </div>
 
 <p>where $\Delta_v, \Delta_w$ are the scaling dimensions of $V,W$, the times are $t_1 = i\epsilon_1$, $t_2 = t + i\epsilon_2$, $t_3 = i\epsilon_3$, $t_4 = t + i\epsilon_4$ with $\epsilon_{ij} = i(e^{i\epsilon_i} - e^{i\epsilon_j})$, and the momentum integral has been done assuming $\Delta_w \gg \Delta_v$.</p>
+
+<p>The proof methodology is simple: the 4-point function is an overlap of the two states $|\Psi\rangle = W(t_2)^\dagger V(t_1)^\dagger|TFD\rangle$ and $|\Psi'\rangle = V(t_3)W(t_4)|TFD\rangle$. We look at the bulk fields dual to $V,W$ via the extrapolate dictionary and view them as particle excitations &mdash; sitting near the horizon they are highly blueshifted, so they <a href="https://en.wikipedia.org/wiki/WKB_approximation">behave like particles</a>. Time evolve the operators so that the $V(t_3)$ and $W(t_4)$ quanta sit on one common early slice, spacelike separated, and likewise the $V(t_1)$ and $W(t_2)$ quanta on one common late slice: $|\Psi'\rangle$ is then an `in' state and $|\Psi\rangle$ an `out' state, and $D$ becomes a two-to-two scattering problem. Then, for example, $V(t_3)|TFD\rangle$ can be expanded in bulk field position eigenstates $\phi_v|TFD\rangle$, and the overlap $\langle TFD|\phi_v\, V|TFD\rangle$ is by definition the <a href="https://arxiv.org/abs/hep-th/9802150">Witten bulk-to-boundary propagator</a>, given by solutions of the Klein-Gordon equation with the appropriate boundary conditions. It depends on the bulk coordinates, but in scattering lingo it is best to convert to longitudinal momenta (which are the null momenta) and transverse positions, which is where the Fourier transform comes in, giving (10)-(13).</p>
 
 <p>(will add more details later...)</p>
 

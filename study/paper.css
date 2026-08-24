@@ -91,8 +91,8 @@ em { color: #F3F7FF; font-style: italic; }
 
 /* a highlighted display equation */
 .hero-eq {
-    margin: 1.6rem 0 2.2rem;
-    padding: 1.1rem 1.4rem;
+    margin: 0.75rem 0 1.25rem;
+    padding: 0.5rem 1.4rem;
     background: linear-gradient(180deg, rgba(45,212,191,0.06), rgba(45,212,191,0.02));
     border: 1px solid var(--line);
     border-left: 3px solid var(--teal);
@@ -110,7 +110,7 @@ em { color: #F3F7FF; font-style: italic; }
 }
 .steps > p:first-child { margin-top: 0; }
 .steps > p:last-child  { margin-bottom: 0; }
-.steps .hero-eq { margin: 1.0rem 0 1.4rem; }
+.steps .hero-eq { margin: 0.6rem 0 0.9rem; }
 
 /* figures / embedded animations */
 figure { margin: 2rem 0 2.4rem; }
@@ -153,3 +153,5 @@ figcaption b.coral { color: var(--coral);   font-weight: 600; }
 /* MathJax should ride on the dark background */
 mjx-container { color: var(--ink); }
 .hero-eq mjx-container { color: #EAFBF8; }
+/* MathJax's own display margins are far too tall inside the equation boxes */
+.hero-eq mjx-container[display="true"] { margin: 0.45em 0 !important; }
