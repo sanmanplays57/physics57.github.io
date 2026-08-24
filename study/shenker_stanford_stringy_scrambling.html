@@ -56,7 +56,7 @@ $$D(\{t_i,x_i\}) = \big\langle V_{x_1}(t_1)\, W_{x_2}(t_2)\, V_{x_3}(t_3)\, W_{x
 $$D(\{t_i,x_i\}) = \frac{a_0^4}{(4\pi)^2}\int e^{i\delta(s,|x-x'|)}\Big[p_1^u\,\psi_1^*(p_1^u,x)\,\psi_3(p_1^u,x)\Big]\Big[p_2^v\,\psi_2^*(p_2^v,x')\,\psi_4(p_2^v,x')\Big] \tag{8}$$
 </div>
 
-<p>where the integral runs over the transverse positions $x,x'$ with measure factors $r_0^{d-1}$ and over the null momenta $p_1^u, p_2^v$. The $\delta$ is a phase, and also a two-to-two scattering amplitude, a function of the transverse separation $b = |x-x'|$ and of the Mandelstam-like variable $s = a_0\,p_1^u p_2^v$. Each wave function is a Fourier transform of a bulk-to-boundary propagator with respect to a null coordinate, in exchange for the large null momentum,</p>
+<p>where the integral runs over the transverse positions $x,x'$ with measure factors $r_0^{d-1}$ and over the null momenta $p_1^u, p_2^v$. The $\delta$ is a phase, and also a 2-2 scattering amplitude, a function of the transverse separation $b = |x-x'|$ and of the Mandelstam-like variable $s = a_0\,p_1^u p_2^v$. Each wave function is a Fourier transform of a bulk-to-boundary propagator with respect to a null coordinate, in exchange for the large null momentum,</p>
 
 <div class="hero-eq">
 $$\psi_1(p^u,x) = \int dv\, e^{ia_0p^uv/2}\,\big\langle \phi_v(u,v,x)\, V_{x_1}(t_1)^\dagger \big\rangle\big|_{u=0} \tag{10}$$
@@ -86,19 +86,31 @@ $$\frac{\langle V(i\epsilon_1)W(t+i\epsilon_2)V(i\epsilon_3)W(t+i\epsilon_4)\ran
 
 <p><b>1.</b> The 4-point function is an overlap of the two states $|\Psi\rangle = W(t_2)^\dagger V(t_1)^\dagger|TFD\rangle$ and $|\Psi'\rangle = V(t_3)W(t_4)|TFD\rangle$.</p>
 
-<p><b>2.</b> Look at the bulk fields dual to $V,W$ via the extrapolate dictionary and view them as particle excitations. Sitting near the horizon they are highly blueshifted, so they <a href="https://en.wikipedia.org/wiki/WKB_approximation">behave like particles</a>.</p>
+<p><b>2.</b> Look at the bulk fields dual to $V,W$ via the extrapolate dictionary and view them as particle excitations, since sitting near the horizon they are highly blueshifted and so <a href="https://en.wikipedia.org/wiki/WKB_approximation">behave like particles</a>. Time evolve the operators so that the $V(t_3)$ and $W(t_4)$ quanta sit on one common early slice, spacelike separated, and likewise the $V(t_1)$ and $W(t_2)$ quanta on one common late slice. Then $|\Psi'\rangle$ is an `in' state and $|\Psi\rangle$ an `out' state, so this becomes a 2-2 scattering problem.</p>
 
-<p><b>3.</b> Time evolve the operators so that the $V(t_3)$ and $W(t_4)$ quanta sit on one common early slice, spacelike separated, and likewise the $V(t_1)$ and $W(t_2)$ quanta on one common late slice. Then $|\Psi'\rangle$ is an `in' state and $|\Psi\rangle$ an `out' state, so this becomes a two-to-two scattering problem.</p>
+<p><b>3.</b> For example, since the $V$ particle cuts the $v$ axis, $V(t_3)|TFD\rangle$ can be represented as a state in the Hilbert space associated to the $u = 0$ slice, labelled by the longitudinal momentum and transverse position of the particle associated to $V$, i.e. $|p_3^u, x_3\rangle$. There is no $p^v$, because near the horizon the $V$ particle is highly boosted to move in the $u$ direction. This explains the restriction to $u = 0$ in (10).</p>
 
-<p><b>4.</b> For example, since the $V$ particle cuts the $v$ axis, $V(t_3)|TFD\rangle$ can be represented as a state in the Hilbert space associated to the $u = 0$ slice, labelled by the longitudinal momentum and transverse position of the particle associated to $V$, i.e. $|p_3^u, x_3\rangle$. There is no $p^v$, because near the horizon the $V$ particle is highly boosted to move in the $u$ direction. This explains the restriction to $u = 0$ in (10).</p>
+<p><b>4.</b> $V(t_3)|TFD\rangle$ can then be expanded in bulk field position eigenstates $\phi_v|TFD\rangle$, and the overlap $\langle TFD|\phi_v\, V|TFD\rangle$ is by definition the <a href="https://arxiv.org/abs/hep-th/9802150">Witten bulk-to-boundary propagator</a>, given by solutions of the Klein-Gordon equation with the appropriate boundary conditions.</p>
 
-<p><b>5.</b> $V(t_3)|TFD\rangle$ can then be expanded in bulk field position eigenstates $\phi_v|TFD\rangle$, and the overlap $\langle TFD|\phi_v\, V|TFD\rangle$ is by definition the <a href="https://arxiv.org/abs/hep-th/9802150">Witten bulk-to-boundary propagator</a>, given by solutions of the Klein-Gordon equation with the appropriate boundary conditions.</p>
+<p><b>5.</b> The propagator depends on the bulk coordinates, but in scattering lingo it is best to convert to longitudinal momenta (the null momenta $p^u, p^v$) and transverse positions $x^i$, via the FT, giving (10)-(13). Also for example, the reason why $u$ and $p^v$ appear together is that $[x^i,p_j] = i\delta^i_j$, i.e. the momenta live in the cotangent bundle, so $p_v = g_{vu}p^u = -\frac{a_0}{2}p^u$, and $p^u$ appears in the FT because of the metric factor.</p>
 
-<p><b>6.</b> It depends on the bulk coordinates, but in scattering lingo it is best to convert to longitudinal momenta (the null momenta $p^u, p^v$) and transverse positions $x^i$, via the FT, giving (10)-(13).</p>
+<p><b>6.</b> The `in' and `out' bulk particle states differ by a phase in the elastic limit</p>
+
+<div class="hero-eq">
+$$|p_1^u,x_1;p_2^v,x_2\rangle_{out} \approx e^{i\delta(s,b)}|p_1^u,x_1;p_2^v,x_2\rangle_{in} + |\chi\rangle \tag{19}$$
+</div>
+
+<p>where $|\chi\rangle$ is the inelastic component of the scattering, orthogonal to all `in' states consisting of a single $W$ particle and a single $V$ particle. Assembling all these we get (8).</p>
 
 </div>
 
+<p>The proof of the expression for $\delta$ uses <a href="https://arxiv.org/abs/hep-th/9203082">Kabat-Ortiz</a>:</p>
+
+<div class="steps">
+
 <p>(will add more details later...)</p>
+
+</div>
 
 <h2>Details of the calculations</h2>
 
