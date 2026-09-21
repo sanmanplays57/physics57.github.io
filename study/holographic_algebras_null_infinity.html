@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2609.01706 Holographic algebras at null infinity</title>
+
+    <link rel="stylesheet" href="paper.css">
+
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']]
+        }
+    };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+
+<body>
+
+<div class="hero-glow"></div>
+
+<div class="wrap">
+
+<h1><a href="https://arxiv.org/abs/2609.01706">2609.01706</a> Holographic algebras at null infinity</h1>
+
+<p class="subtitle">by Chang-Han Chen, Geoff Penington, Gautam Satishchandran, Elisa Tabor</p>
+
+<p>Talk video available <a href="https://www.youtube.com/watch?v=WE4_YuHH6XI">here</a>.</p>
+
+<h2>Prerequisites</h2>
+
+<p>Basics of <a href="https://arxiv.org/abs/2510.07017">algebraic QFT and von Neumann algebras</a>, ADM and Bondi mass, and the <a href="https://arxiv.org/abs/2302.02709">timelike tube theorem</a>.</p>
+
+<h2>Summary</h2>
+
+<p><em>Rigour/Pedantry is kinda important in this kind of paper and the choice of whether to put on my physics hat or math hat is based on my idiosyncrasies and not the authors. We will not talk about spacetimes with blackholes for simplicity in the summary.</em></p>
+
+<p>The goal of this paper is to find what bulk region is accessible from a small cut on the future null infinity $\mathscr{I}^{+}$ of flat spacetimes in the semiclassical $G_{\text{N}} \to 0$ limit, using the language of von Neumann algebras. The answer they find is: the whole causal wedge associated with a timelike slice which contains the cut. The methodology is best summarized in Figure 7 of the paper.</p>
+
+<p>The idea is to use a Bondi mass operator to evolve the states along the future of the cut, and then use the timelike tube theorem and the time slice axiom to generate the causal wedge.</p>
+
+<figure>
+    <div class="video-frame">
+        <video src="null_infinity_wedge.mp4?v=1" autoplay muted loop playsinline></video>
+    </div>
+    <figcaption>
+        Figure 7 of paper animated.
+    </figcaption>
+</figure>
+
+<p>In more details, we start by recalling that local operators $\hat{\gamma}_{ab}(x)$ are not well defined because they have infinite norm, $\|\hat{\gamma}_{ab}(x)|\Omega\rangle\|^{2} \to \infty$, so we smear them using a test function $f$</p>
+
+<div class="hero-eq">
+$$\hat{\gamma}(f) = \int_{M}\sqrt{-g}\,d^{d}x\;\hat{\gamma}_{ab}(x)\,f^{ab}(x) \tag{2.36}$$
+</div>
+
+<p>What&rsquo;s non-trivial is that <a href="https://arxiv.org/abs/2302.02709">smearing in time is enough</a>.</p>
+
+<p>The problem (section 3) is that unlike the ADM mass, which is regularized by subtracting off the background piece, the usual Bondi mass</p>
+
+<div class="hero-eq">
+$$M_{B}(u) = M_{i^{0}} - \frac{1}{32\pi G_{\text{N}}} \int_{\mathscr{I}^{+}_{&lt;u}}du\,d\Omega \; N^{2} - \int_{\mathscr{I}^{+}_{&lt;u}}du\,d\Omega\;T^{(d-2)}_{uu} \tag{2.31}$$
+</div>
+
+<p>where $M_{i^{0}}$ is the ADM mass, $N^{2}=N_{AB}N^{AB}$ is built from the news tensor and is the gravitational radiation reaching $\mathscr{I}^{+}$ before the cut, and $T^{(d-2)}_{uu}=\lim_{r\to\infty}r^{d-2}T_{uu}$ is the matter stress-energy flux; both subtracted terms are negative definite.</p>
+
+<p>This captures the escaping gravitational radiation, depends on the cut, is not a good operator, and smearing in null time doesn&rsquo;t help because the divergences are in the angular direction</p>
+
+<div class="hero-eq">
+$$\langle\Psi|\mathcal{E}^{2}_{\mathscr{I}^{+}_{&lt;u}}|\Psi\rangle = \frac{d(d-3)}{16\pi^{2}}\lim_{L \to \infty}N_{L}\left(\lim_{\epsilon \to 0^{+}}\int_{-\infty}^{u}\!\!du_{1}\int_{-\infty}^{u}\!\!du_{2}\, \frac{1}{(u_{1}-u_{2}-i\epsilon)^{4}}\right) + \dots \tag{3.14}$$
+</div>
+
+<p>where $\gamma_{ab}=\delta g_{ab}$ is the graviton perturbation and $t^{a}$ the asymptotically timelike Killing field. $\mathcal{E}_{\Sigma}$ is the energy associated with a surface $\Sigma$: on a spacelike surface it is the canonical energy $\mathcal{E}_{\Sigma}(\gamma) = \tfrac{1}{2}W^{\text{GR}}_{\Sigma}(\gamma,\mathcal{L}_{t}\gamma)$, built from the symplectic form $W_{\Sigma}$ on the space of perturbations, and on $\mathscr{I}^{+}_{&lt;u}$ it is the energy radiated through that piece of null infinity, so the left hand side is its vacuum fluctuation.</p>
+
+<p>Both factors on the right diverge. The double integral diverges because of the sharp cutoff at $u$. The prefactor diverges because $N_{L}=\sum_{\ell=0}^{L}g_{\ell}$, the number of spherical harmonics up to an angular cutoff $L$ with $g_{\ell}$ the degeneracy at degree $\ell$ on $\mathbb{S}^{d-2}$, grows like $L^{d-2}$; this traces back to the $\delta$-function on the sphere in the news two point function. Smearing in $u$ cures the first but not the second.</p>
+
+<p>The solution (section 3.2) is to define a regularized bulk Bondi mass $\hat{M}^{(2)}_{\text{B}}(u_{0},r_{0})$ on a large but finite sphere $S(u_{0},r_{0})$</p>
+
+<div class="hero-eq">
+$$\hat{M}^{(2)}_{\text{B}}(u_{0},r_{0}) = \delta^{2} \hat{M}_{i^{0}}-\mathcal{E}_{\Sigma_{\text{out}}[u_{0},r_{0}]}(\hat{\gamma}) - \int_{\Sigma_{\text{out}}[u_{0},r_{0}]}\!\!\sqrt{h}\,d^{d-1}x\;n^{a}t^{b}\hat{T}_{ab}[\delta \hat{\phi}] \tag{3.23}$$
+</div>
+
+<p>i.e. the ADM mass minus the graviton canonical energy and the matter Hamiltonian, both integrated only over the part $\Sigma_{\text{out}}[u_{0},r_{0}]$ of a Cauchy surface running from the sphere out to spatial infinity. $\hat{M}^{(2)}_{\text{B}}(u_{0},r_{0})$ when smeared along retarded time against a real $f$ with $\int du\,f(u)=1$</p>
+
+<div class="hero-eq">
+$$\hat{M}_{B}^{(2)}(f;u_{0},r_{0}) \equiv \int_{\mathbb{R}}du^{\prime}\, f(u^{\prime}-u_{0})\, \hat{M}^{(2)}_{B}(u^{\prime},r_{0}) \tag{3.33}$$
+</div>
+
+<p>is a good operator and can be exponentiated to generate time translations along the null infinity.</p>
+
+<p>The two more ingredients that we need are</p>
+
+<div class="steps">
+
+<p><b>1. Time slice axiom:</b> Roughly this one says that the algebra of observables in a neighborhood of a Cauchy slice is equal to the algebra of observables of the Cauchy development (causal wedge). This one is kinda trivial consequence of causality.</p>
+
+<p><b>2. Timelike tube theorem:</b> Roughly says that the algebra of observables in a neighborhood of a timelike curve $\gamma$ in a real analytic spacetime is equal to the algebra of observables in the timelike envelope, which is the set of all timelike curves with the same end points as $\gamma$. <a href="https://arxiv.org/abs/hep-th/0506118">HKLL</a> is a special case of this.</p>
+
+</div>
+
+<!-- VIDEO 2 (timelike tube theorem / envelope) goes here -->
+
+<p>Now Fig. 7 / the above animation should make sense:</p>
+
+<div class="steps">
+
+<p><b>1.</b> Use the bulk Bondi mass to generate the algebra in $r&lt;r_{\text{min}}$ and $u&gt;u_{0}$.</p>
+
+<p><b>2.</b> Use the timelike tube theorem w.r.t. the $r=r_{\text{min}}$ curve to generate the algebra in the timelike envelope.</p>
+
+<p><b>3.</b> Finally realize there&rsquo;s a full Cauchy slice (associated to the region spacelike separated from $u_{0}$, i.e. $\mathcal{W}_{u_{0}}$) worth of data available to us now, so that the time slice axiom generates the whole causal wedge associated to this slice.</p>
+
+</div>
+
+<p>When the cut is pushed to $i^{0}$ we get the algebra of observables for the full Minkowski spacetime, $\mathcal{A}(-\infty)=\mathcal{B}(\mathcal{H})=\mathcal{A}(i^{0})$, which is Type I$_{\infty}$. At any finite cut it is Type III$_{1}$, since the commutant is the radiation $\mathcal{A}(\mathscr{I}^{+}_{&lt;u_{0}})$ that escaped before the cut, and the two are UV entangled across it. (It is not Type II because the Bondi mass is already a part of the QFT wedge algebra, unlike what would happen for BH spacetimes.)</p>
+
+<p>Also crucially</p>
+
+<div class="hero-eq">
+$$[\hat{M}^{(2)}_{\text{B}}(f;u_{0},r_{0} ), \mathcal{O}]=
+\begin{cases}
+-i\,\mathcal{L}_{t}\mathcal{O} & \text{supp}(\mathcal{O})\in \mathcal{W}_{\text{L}}[u_{0},r_{0}]\\[2pt]
+0 & \text{supp}(\mathcal{O})\in \mathcal{W}_{\text{R}}[u_{0},r_{0}]
+\end{cases} \tag{3.25}$$
+</div>
+
+<p>also by microcausality. Here $\mathcal{W}_{\text{L}}[u_{0},r_{0}]$ and $\mathcal{W}_{\text{R}}[u_{0},r_{0}]$ are the regions spacelike separated from the sphere $S(u_{0},r_{0})$ at smaller and larger radius respectively.</p>
+
+<!-- FIGURE (recreation of Fig. 4, the S(u_0,r_0) split) goes here -->
+
+<p>so that the algebra associated with a future cut sits within the algebra of a past cut</p>
+
+<div class="hero-eq">
+$$\mathcal{A}(u_{1}) \subsetneq \mathcal{A}(u_{0}) \qquad u_{1}&gt;u_{0} \tag{4.17}$$
+</div>
+
+<p>essentially because we lose information due to the outgoing radiation flux through null infinity before the cut.</p>
+
+<h2>See also</h2>
+
+<p>Similar paper by <a href="https://arxiv.org/abs/2002.02448">Suvrat</a>.</p>
+
+<p class="back"><a href="index.html">&larr; Back to Study with me</a></p>
+
+</div>
+
+</body>
+</html>
